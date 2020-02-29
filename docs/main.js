@@ -56,7 +56,8 @@ function input_task_submit_clicked() {
     update_view();
 }
 
-function update_view() { // Funksjon for � oppdatere det som syntes p� siden.
+// Funksjon for � oppdatere det som syntes p� siden.
+function update_view() {
     const users_JSON = window.localStorage.getItem('users');
     const tasks_JSON = window.localStorage.getItem('tasks');
 
@@ -67,7 +68,7 @@ function update_view() { // Funksjon for � oppdatere det som syntes p� siden
     console.log("Tasks: " + tasks_JSON);
 
     // Her må det ligge kode for å generere nye diver
-
+    
     // Alternativt kan denne funksjonen fjernes og funksjonliteten flyyttes til input_task_submit_clicked() og input_users_submit_clicked()
 }
 
