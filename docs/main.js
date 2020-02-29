@@ -23,9 +23,9 @@ function input_user_submit_clicked() { // Funksjon for � legge til ny "user"
 function input_task_submit_clicked() { // Funksjon for � legge til ny "task"
     current_tasks = JSON.parse(window.localStorage.getItem('tasks')) || []; // Henter alle lagrede "tasks" og legger de inn i et array(current_tasks)
 
-    new_task_name = input_task_name_element.value;
-    new_task_description = input_task_description_element.value;
-    new_task_object = { new_task_name, new_task_description };
+    task_name = input_task_name_element.value;
+    task_description = input_task_description_element.value;
+    new_task_object = { task_name, task_description };
 
     current_tasks.push(new_task_object);
 
