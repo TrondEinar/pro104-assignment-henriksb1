@@ -1,10 +1,6 @@
 // javascript
 
 
-// Dummy localStorage
-
-
-
 
 // Elements 
 
