@@ -51,3 +51,6 @@ input_user_submit_element.onclick = input_user_submit_clicked;
 input_task_submit_element.onclick = input_task_submit_clicked;
 
 update_view(); // Run on page load
+
+
+// WEeeeenda en test fra Visual
