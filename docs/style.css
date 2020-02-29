@@ -20,7 +20,7 @@
     grid-column-start: 3;
 }
 /*Create Task Text input*/
-#task-input-text{
+.task-input-text{
     width: 20em;
     height: 2em;
 }
