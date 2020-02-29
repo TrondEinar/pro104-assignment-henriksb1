@@ -1,3 +1,6 @@
+body {
+    background-color: #7395AE;
+}
 
 /*Main container CSS*/
 #main-container{
@@ -35,6 +38,7 @@
     grid-column-start: 3;
     grid-row-start: 4;
 }
-#task-one{
+
+/* #task-one{
     border: 2px solid black;
-}
+} */
