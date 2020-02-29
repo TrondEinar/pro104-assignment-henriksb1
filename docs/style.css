@@ -1,0 +1,16 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+#memberDiv {
+    border: solid black;
+    height: 100px;
+    width: 100px;
+}
+
+#tasksDiv {
+    border: solid black;
+    height: 100px;
+    width: 100px;
+}
