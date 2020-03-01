@@ -22,38 +22,49 @@ var input_task_submit_element = document.getElementById('input_task_submit');
 
 // Funksjon for � legge til ny "user"
 function input_user_submit_clicked() {
-    // Henter alle de lagrede brukerene og legger de inn i et array(current_users)
-    current_users = JSON.parse(window.localStorage.getItem('users')) || [];
+    if (input_user_element.value != "") {
+        // Henter alle de lagrede brukerene og legger de inn i et array(current_users)
+        current_users = JSON.parse(window.localStorage.getItem('users')) || [];
 
-    // Legger til den nye brukeren til array(curent_users)
-    current_users.push(input_user_element.value);
+        // Legger til den nye brukeren til array(curent_users)
+        current_users.push(input_user_element.value);
 
-    // Lagrer til localStorage som JSON
-    window.localStorage.setItem('users', JSON.stringify(current_users));
+        // Lagrer til localStorage som JSON
+        window.localStorage.setItem('users', JSON.stringify(current_users));
 
-    // Oppdater og lag nye diver
-    update_view();
+        // Oppdater og lag nye diver
+        update_view();
+    } else {
+        // ################ Kode: Output til bruker om at felt ikke er riktig utfylt. ###############
+        console.log("User: Felt ikke riktig utfylt");
+    }
 }
 
 // Funksjon for � legge til ny "task"
 function input_task_submit_clicked() { 
-    // Henter alle lagrede "tasks" og legger de inn i et array(current_tasks)
-    current_tasks = JSON.parse(window.localStorage.getItem('tasks')) || [];
+    // Sjekk om alle felter er fylt ut, evt legg til restriksjoner for tegn her.
+    if (input_task_name_element.value != "" && input_task_description_element.value != "") {
+        // Henter alle lagrede "tasks" og legger de inn i et array(current_tasks)
+        current_tasks = JSON.parse(window.localStorage.getItem('tasks')) || [];
 
-    // Definer variabler for ny "task"
-    task_name = input_task_name_element.value;
-    task_description = input_task_description_element.value;
-    new_task_object = { task_name, task_description };
-    
-    // Legg til nytt "task"-objekt i array(current_tasks)
-    current_tasks.push(new_task_object);
-    console.log("Adding task: " + new_task_object['task_name'] + new_task_object['task_description']);
+        // Definer variabler for ny "task"
+        task_name = input_task_name_element.value;
+        task_description = input_task_description_element.value;
+        new_task_object = { task_name, task_description };
+        
+        // Legg til nytt "task"-objekt i array(current_tasks)
+        current_tasks.push(new_task_object);
+        console.log("Adding task: " + new_task_object['task_name'] + new_task_object['task_description']);
 
-    // Lagrer til localStorage
-    window.localStorage.setItem('tasks', JSON.stringify(current_tasks));
+        // Lagrer til localStorage
+        window.localStorage.setItem('tasks', JSON.stringify(current_tasks));
 
-    // Oppdater og lag nye diver
-    update_view();
+        // Oppdater og lag nye diver
+        update_view();
+    } else {
+        // ################ Kode: Output til bruker om at felt ikke er riktig utfylt. ###############
+        console.log("Task: Felt ikke riktig utfylt");
+    }
 }
 
 // Funksjon for � oppdatere det som syntes p� siden.
