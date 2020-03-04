@@ -39,14 +39,36 @@ function renderTasks () {
   const taskList = JSON.parse(taskListJSON) || [];
   taskOutputDiv.innerHTML = "";
   for (const user_input_tasks of taskList) {
-    taskOutputDiv.innerHTML += `<div class="output_card">${user_input_tasks}</div>`;
+    taskOutputDiv.innerHTML += `<div id="task_card" class="output_card" onclick="displayModal()">${user_input_tasks}</div>`;
   }
 }
 
 // CLICK ON TASK TO ASSIGN MEMBER
 
-// wtf
+// let taskCard = document.getElementById("task_card");
+let modalContentBox = document.getElementById("modal-content");
+let modal = document.getElementById("myModal");
+let span = document.getElementsByClassName("close")[0];
 
+function displayModal () {
+  modal.style.display = "block";
+  const nameListJSON = window.localStorage.getItem("nameList");
+  const nameList = JSON.parse(nameListJSON) || [];
+  modalContentBox.innerHTML = "";
+  for (const user_input_names of nameList) {
+    modalContentBox.innerHTML += `<div class="output_card">${user_input_names}</div>`;
+  }
+}
+
+/* span.onclick = function() {
+  modal.style.display = "none";
+}; */
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
 
 
 // CLEAR LOCAL STORAGE AND OUTPUT
