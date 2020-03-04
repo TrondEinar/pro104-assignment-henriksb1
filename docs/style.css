@@ -70,7 +70,7 @@ input {
   padding: 10px;
 }
 
-#task_card:hover {
+#task_card:hover, #name_card:hover {
   background-color: orange;
   cursor: pointer;
 }
