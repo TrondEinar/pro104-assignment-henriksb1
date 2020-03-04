@@ -1,92 +1,60 @@
-// javascript
-//
-// For Arbeidskrav i Webprosjekt V2020
-//
-// Av Brage Svensli, Henrik Bråthen, Eirik Bjørøen, Torstein Ensrud, Knut Heggdal.
-//
 
+// SAVE NAMES
 
+const saveNameBtn = document.getElementById("saveNameBtn");
+const nameOutputDiv = document.getElementById("name_output_div");
 
-// --Elements-- 
+saveNameBtn.onclick = function () {
+  const user_input_names = document.getElementById("user_input_names").value;
+  const nameList = JSON.parse(window.localStorage.getItem("nameList")) || [];
+  nameList.push(user_input_names);
+  window.localStorage.setItem("nameList", JSON.stringify(nameList));
+  renderNames();
+};
 
-// Input og knapp for "user"
-var input_user_element = document.querySelector("[name='input_user']");
-var input_user_submit_element = document.getElementById('input_user_submit');
-
-// Input og knapp for "task"
-var input_task_name_element = document.querySelector("[name='input_task_name']");
-var input_task_description_element = document.querySelector("[name='input_task_description']");
-var input_task_submit_element = document.getElementById('input_task_submit');
-
-// --Functions--
-
-// Funksjon for � legge til ny "user"
-function input_user_submit_clicked() {
-    if (input_user_element.value != "") {
-        // Henter alle de lagrede brukerene og legger de inn i et array(current_users)
-        current_users = JSON.parse(window.localStorage.getItem('users')) || [];
-
-        // Legger til den nye brukeren til array(curent_users)
-        current_users.push(input_user_element.value);
-
-        // Lagrer til localStorage som JSON
-        window.localStorage.setItem('users', JSON.stringify(current_users));
-
-        // Oppdater og lag nye diver
-        update_view();
-    } else {
-        // ################ Kode: Output til bruker om at felt ikke er riktig utfylt. ###############
-        console.log("User: Felt ikke riktig utfylt");
-    }
+function renderNames () {
+  const nameListJSON = window.localStorage.getItem("nameList");
+  const nameList = JSON.parse(nameListJSON) || [];
+  nameOutputDiv.innerHTML = "";
+  for (const user_input_names of nameList) {
+    nameOutputDiv.innerHTML += `<div class="output_card">${user_input_names}</div>`;
+  }
 }
 
-// Funksjon for � legge til ny "task"
-function input_task_submit_clicked() { 
-    // Sjekk om alle felter er fylt ut, evt legg til restriksjoner for tegn her.
-    if (input_task_name_element.value != "" && input_task_description_element.value != "") {
-        // Henter alle lagrede "tasks" og legger de inn i et array(current_tasks)
-        current_tasks = JSON.parse(window.localStorage.getItem('tasks')) || [];
+// SAVE TASKS
 
-        // Definer variabler for ny "task"
-        task_name = input_task_name_element.value;
-        task_description = input_task_description_element.value;
-        new_task_object = { task_name, task_description };
-        
-        // Legg til nytt "task"-objekt i array(current_tasks)
-        current_tasks.push(new_task_object);
-        console.log("Adding task: " + new_task_object['task_name'] + new_task_object['task_description']);
+const saveTaskBtn = document.getElementById("saveTaskBtn");
+const taskOutputDiv = document.getElementById("task_output_div");
 
-        // Lagrer til localStorage
-        window.localStorage.setItem('tasks', JSON.stringify(current_tasks));
+saveTaskBtn.onclick = function () {
+  const user_input_tasks = document.getElementById("user_input_tasks").value;
+  const taskList = JSON.parse(window.localStorage.getItem("taskList")) || [];
+  taskList.push(user_input_tasks);
+  window.localStorage.setItem("taskList", JSON.stringify(taskList));
+  renderTasks();
+};
 
-        // Oppdater og lag nye diver
-        update_view();
-    } else {
-        // ################ Kode: Output til bruker om at felt ikke er riktig utfylt. ###############
-        console.log("Task: Felt ikke riktig utfylt");
-    }
+function renderTasks () {
+  const taskListJSON = window.localStorage.getItem("taskList");
+  const taskList = JSON.parse(taskListJSON) || [];
+  taskOutputDiv.innerHTML = "";
+  for (const user_input_tasks of taskList) {
+    taskOutputDiv.innerHTML += `<div class="output_card">${user_input_tasks}</div>`;
+  }
 }
 
-// Funksjon for � oppdatere det som syntes p� siden.
-function update_view() {
-    const users_JSON = window.localStorage.getItem('users');
-    const tasks_JSON = window.localStorage.getItem('tasks');
+// CLICK ON TASK TO ASSIGN MEMBER
 
-    const users_parsed = JSON.parse(users_JSON);
-    const tasks_parsed = JSON.parse(tasks_JSON);
-
-    console.log("Users: " + users_JSON);
-    console.log("Tasks: " + tasks_JSON);
-
-    // Her må det ligge kode for å generere nye diver
-    
-    // Alternativt kan denne funksjonen fjernes og funksjonliteten flyyttes til input_task_submit_clicked() og input_users_submit_clicked()
-}
+// wtf
 
 
-// Set onClick()
-input_user_submit_element.onclick = input_user_submit_clicked;
-input_task_submit_element.onclick = input_task_submit_clicked;
 
-// Run on page load
-update_view();
+// CLEAR LOCAL STORAGE AND OUTPUT
+
+const clearBtn = document.getElementById("clearBtn");
+
+clearBtn.onclick = function () {
+  window.localStorage.clear();
+  nameOutputDiv.innerHTML = "";
+  taskOutputDiv.innerHTML = "";
+};

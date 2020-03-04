@@ -1,57 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-   
-   
-   
-   <div id="main-container">
-     
-        <h1>Team and tasks</h1>
-      
-       <div id="team-input">
-          <h2>Add Team Member</h2>
-            <p>Member name:</p>
-           <input id="team-input-text" name="input_user" type="text"><br/>
-           <input id="input_user_submit" type="submit" value="Submit">
-       </div>
-       
-     
-       <div id="task-input">
-            <h2>Add a task</h2>
-            <p>Task Name:</p>
-           <input class="task-input-text" name="input_task_name" type="text"><br/>
-           <p>Task Description:</p>
-           <input class="task-input-text" name="input_task_description" type="text"><br/>
-           <input type="radio">
-           <label for="Team 1">Team 1</label>
-           <input type="radio">
-           <label for="Team 2">Team 2</label>
-           <input type="radio">
-           <label for="team 3">Team 3</label><br/>
-           <input id="input_task_submit" type="submit" value="Submit">
-        
-       </div>
-       
-     
-       <div id="team-member"></div>
-       
-       
-       
-       <div id="task">
-           <div id="task-one"></div>
-           <div id="task-two"></div>
-           <div id="task-three"></div>
-       </div>
-       
-       
-   
-   </div>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8">
+    <title>Testing LocalStorage</title>
+  </head>
+  <body>
+    <h1>Testing LocalStorage</h1>
 
-   <script src="main.js"></script>
-</body>
+    <div class="fieldset_container">
+      <fieldset>
+        <legend>Save names</legend>
+        <input id="user_input_names" type="text" onfocus="this.value=''" />
+        <button id="saveNameBtn" type="button">Save</button>
+      </fieldset>
+    </div>
+
+    <div class="fieldset_container">
+      <fieldset>
+        <legend>Save tasks</legend>
+        <input id="user_input_tasks" type="text" onfocus="this.value=''" />
+        <button id="saveTaskBtn" type="button">Save</button>
+      </fieldset>
+    </div>
+
+    <div class="fieldset_container">
+      <fieldset>
+        <legend>Clear LocalStorage</legend>
+        <button id="clearBtn" type="button">Clear</button>
+      </fieldset>
+    </div>
+
+    <div id="name_output_fieldset" class="fieldset_container">
+      <fieldset>
+        <legend>Saved names</legend>
+        <div id="name_output_div">
+        </div>
+      </fieldset>
+    </div>
+
+    <div id="task_output_fieldset" class="fieldset_container">
+      <fieldset>
+        <legend>Saved tasks</legend>
+        <div id="task_output_div">
+        </div>
+      </fieldset>
+    </div>
+
+    <div id="name_task_output_fieldset" class="fieldset_container">
+      <fieldset>
+        <legend>Members plus tasks (grid plz)</legend>
+        <div id="name_task_output_div">
+        </div>
+      </fieldset>
+    </div>
+
+    <script type="text/javascript" src="functionality.js"></script>
+
+  </body>
 </html>
