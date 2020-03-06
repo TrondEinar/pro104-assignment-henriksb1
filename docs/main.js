@@ -45,14 +45,19 @@ function renderNames () {
   const nameListJSON = window.localStorage.getItem("nameList");
   const nameList = JSON.parse(nameListJSON) || [];
   nameOutputDiv.innerHTML = "";
-  for (var user_input_names in nameList) {
+  for (var i in nameList) {
     // nameOutputDiv.innerHTML += `<div class="output_card_name">${user_input_names}</div>`;
     // Create main wrapper
     var new_name_div = document.createElement('div');
     new_name_div.className = 'output_card_name';
+    // Create id element to act as primary key. MUST BE THE FIRST CHILD ! ! ! 
+    var new_name_id = document.createElement('p');
+    new_name_id.className = ' card_id';
+    new_name_id.innerHTML = nameList[i]['name_id'];
+    new_name_div.appendChild(new_name_id);
     // Create text element and fill from localStorage + Append to main wrapper
     var new_name_text = document.createElement('h2');
-    new_name_text.innerHTML = nameList[user_input_names]['name_text'];
+    new_name_text.innerHTML = nameList[i]['name_text'];
     new_name_div.appendChild(new_name_text);
     // Create delete button + Append to main wrapper
     var new_name_delete_box = document.createElement('div');
@@ -64,7 +69,7 @@ function renderNames () {
       var name_list = JSON.parse(window.localStorage.getItem('nameList')) || []; // Read
       if (this.style.backgroundColor == 'red') { // Delete from localStorage
         for (var x in name_list) {
-          if (name_list[x]['name_text'] == this.parentNode.parentNode.firstElementChild.innerHTML) {
+          if (name_list[x]['name_id'] == this.parentNode.parentNode.firstElementChild.innerHTML) {
             name_list.splice(x, 1);
             window.localStorage.setItem('nameList', JSON.stringify(name_list)); // Save
             renderTasks();
@@ -73,7 +78,7 @@ function renderNames () {
         this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
       } else { // Change color if not yet changed.
         this.style.backgroundColor = 'red';
-        this.innerHTML = '<p>Sikker?</p>'
+        this.innerHTML = '<p>SLETT?</p>'
         window.localStorage.setItem('nameList', JSON.stringify(name_list)); // Save
       }
       
@@ -122,18 +127,24 @@ function renderTasks () {
     new_task_div.onclick = function() {
       console.log(this.style.height);
       if (this.style.height == '') {
-        this.style.height = '200px';
+        this.style.height = '250px';
       } else {
         this.style.height = '';
       }
     }
+    // Create id element to act as primary key. MUST BE THE FIRST CHILD ! ! ! 
+    var new_task_id = document.createElement('p');
+    new_task_id.className = ' card_id';
+    new_task_id.innerHTML = taskList[i]['task_id'];
+    new_task_div.appendChild(new_task_id);
     // Create text element and fill from localStorage + Append to main wrapper
     var new_task_text = document.createElement('h2');
     new_task_text.innerHTML = taskList[i]['task_text'];
     new_task_div.appendChild(new_task_text);
     // Create dummy fill description
     var new_task_dummy_fill = document.createElement('p');
-    new_task_dummy_fill.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do< eiusmod tempor incididunt ut labore et dolore magna aliqua. <br>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+    new_task_dummy_fill.className = 'dummy_fill';
+    new_task_dummy_fill.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do< m m m m m m m m eiusmod tempor incididunt ut labore et dolore magna aliqua. <br>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
     new_task_div.appendChild(new_task_dummy_fill);
     // Create delete button + Append to main wrapper
     var new_task_delete_box = document.createElement('div');
@@ -144,7 +155,7 @@ function renderTasks () {
       var task_list = JSON.parse(window.localStorage.getItem('taskList')) || []; // Read
       if (this.style.backgroundColor == 'red') { // Delete from localStorage
         for (var x in task_list) {
-          if (task_list[x]['task_text'] == this.parentNode.parentNode.firstElementChild.innerHTML) {
+          if (task_list[x]['task_id'] == this.parentNode.parentNode.firstElementChild.innerHTML) {
             task_list.splice(x, 1);
           }
         }
@@ -162,26 +173,43 @@ function renderTasks () {
     new_task_member_select.className = 'output_card_task_members';
     // Append all members to select wrapper
     for (var x in nameList) {
+      // Main div
       var new_member = document.createElement('div');
       new_member.className = 'card_task_member';
+      // Member id
+      var new_member_id = document.createElement('p');
+      new_member_id.className = 'card_id_inner';
+      new_member_id.innerHTML = nameList[x]['name_id'];
+      new_member.appendChild(new_member_id);
+      // Member name
       var new_member_name = document.createElement('h3');
       new_member_name.innerHTML = nameList[x]['name_text'];
       new_member.appendChild(new_member_name);
-      new_member.onclick = function() { // onlick for adding members to the parent task
+      // onlick for adding members to the parent task
+      new_member.onclick = function() { 
         var name_list = JSON.parse(window.localStorage.getItem('nameList')) || []; 
         var task_list = JSON.parse(window.localStorage.getItem("taskList")) || [];
         for (var i in task_list) {
-          console.log(this.parentNode.parentNode.firstElementChild.innerHTML);
-          console.log(task_list[i]['task_text']);
-          if (task_list[i]['task_text'] == this.parentNode.parentNode.firstElementChild.innerHTML) {
-            task_list[i]['task_members'].push(this.firstElementChild.innerHTML);
+          if (task_list[i]['task_id'] == this.parentNode.parentNode.firstElementChild.innerHTML) {
+            var member_id_already_added = false;
+            for (var y in task_list[i]['task_members']) {
+              console.log(task_list[i]['task_members'] + " vs " + this.firstElementChild.innerHTML);
+              if (task_list[i]['task_members'][y] == this.firstElementChild.innerHTML) {
+                member_id_already_added = true;
+              }
+            }
+            if (member_id_already_added) {
+              alert("Member already added to this task");
+            } else {
+              task_list[i]['task_members'].push(this.firstElementChild.innerHTML);
+              console.log(this.childNodes[1].innerHTML + " er lagt til oppgaven: " +  this.parentNode.parentNode.childNodes[1].innerHTML);
+            }
           }
         }
         window.localStorage.setItem('taskList', JSON.stringify(task_list));
         console.log(task_list);
-        alert(this.childNodes[0].innerHTML + " er lagt til oppgaven: " +  this.parentNode.parentNode.firstElementChild.innerHTML);
       }
-      new_task_member_select.appendChild(new_member);
+      new_task_member_select.insertBefore(new_member, new_task_member_select.childNodes[0]);
     }
     new_task_div.appendChild(new_task_member_select);
     // Append to task_output, before current tasks.
