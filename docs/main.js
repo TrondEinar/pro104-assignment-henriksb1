@@ -190,12 +190,6 @@ function renderTasks () {
   }
 }
 
-// CLICK ON TASK TO ASSIGN MEMBER
-
-// wtf
-
-
-
 // CLEAR LOCAL STORAGE AND OUTPUT
 
 const clearBtn = document.getElementById("clearBtn");
