@@ -207,6 +207,7 @@ function renderTasks () {
             if (member_id_already_added) {
               alert("Member already added to this task");
             } else {
+              this.style.backgroundColor = 'lightgreen';
               task_list[i]['task_members'].push(this.firstElementChild.innerHTML);
               console.log(this.childNodes[1].innerHTML + " er lagt til oppgaven: " +  this.parentNode.parentNode.childNodes[1].innerHTML);
             }
@@ -214,7 +215,6 @@ function renderTasks () {
         }
         window.localStorage.setItem('taskList', JSON.stringify(task_list));
         console.log(task_list);
-        renderTasks();
       }
       new_task_member_select.insertBefore(new_member, new_task_member_select.childNodes[0]);
     }
