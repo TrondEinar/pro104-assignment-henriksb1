@@ -68,21 +68,27 @@ function renderNames () {
     new_name_delete.className = 'card_delete';
     new_name_delete.onclick = function() {
       var name_list = JSON.parse(window.localStorage.getItem('nameList')) || []; // Read
+      var task_list = JSON.parse(window.localStorage.getItem('taskList')) || []; // Read
       if (this.style.backgroundColor == 'red') { // Delete from localStorage
         for (var x in name_list) {
           if (name_list[x]['name_id'] == this.parentNode.parentNode.firstElementChild.innerHTML) {
             name_list.splice(x, 1);
             window.localStorage.setItem('nameList', JSON.stringify(name_list)); // Save
-            renderTasks();
           }
         }
+        for (var y in task_list) {
+          for (var z in task_list[y]['task_members'])
+            if  (task_list[y]['task_members'][z] == this.parentNode.parentNode.firstElementChild.innerHTML) {
+              task_list[y]['task_members'].splice(z, 1);
+              window.localStorage.setItem('taskList', JSON.stringify(task_list)); // Save
+            }
+        }
         this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+        renderTasks();
       } else { // Change color if not yet changed.
         this.style.backgroundColor = 'red';
         this.innerHTML = '<p>SLETT?</p>'
-        window.localStorage.setItem('nameList', JSON.stringify(name_list)); // Save
       }
-      
     };
     new_name_delete_box.appendChild(new_name_delete);
     new_name_div.appendChild(new_name_delete_box);
@@ -145,7 +151,7 @@ function renderTasks () {
     // Create dummy fill description
     var new_task_dummy_fill = document.createElement('p');
     new_task_dummy_fill.className = 'dummy_fill';
-    new_task_dummy_fill.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do< m m m m m m m m eiusmod tempor incididunt ut labore et dolore magna aliqua. <br>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+    new_task_dummy_fill.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
     new_task_div.appendChild(new_task_dummy_fill);
     // Create delete button + Append to main wrapper
     var new_task_delete_box = document.createElement('div');
@@ -202,11 +208,13 @@ function renderTasks () {
               console.log(task_list[i]['task_members'] + " vs " + this.firstElementChild.innerHTML);
               if (task_list[i]['task_members'][y] == this.firstElementChild.innerHTML) {
                 member_id_already_added = true;
+                if (confirm("Member already added, do you want to remove member from the task?")) {
+                  task_list[i]['task_members'].splice(y, 1);
+                  this.style.backgroundColor = '';
+                }
               }
             }
-            if (member_id_already_added) {
-              alert("Member already added to this task");
-            } else {
+            if (!member_id_already_added) {
               this.style.backgroundColor = 'lightgreen';
               task_list[i]['task_members'].push(this.firstElementChild.innerHTML);
               console.log(this.childNodes[1].innerHTML + " er lagt til oppgaven: " +  this.parentNode.parentNode.childNodes[1].innerHTML);
