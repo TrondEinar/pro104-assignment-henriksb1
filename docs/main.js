@@ -39,6 +39,7 @@ saveNameBtn.onclick = function () {
   window.localStorage.setItem("nameList", JSON.stringify(nameList));
   renderNames();
   renderTasks();
+
 };
 
 function renderNames () {
@@ -118,7 +119,7 @@ function renderTasks () {
   const nameList = JSON.parse(window.localStorage.getItem('nameList')) || []; 
   const taskList = JSON.parse(window.localStorage.getItem("taskList")) || [];
   taskOutputDiv.innerHTML = "";
-  for (const i in taskList) {
+  for (var i in taskList) {
     /*taskOutputDiv.innerHTML += `<div class="output_card_task">${user_input_tasks}</div>`;*/
 
     // Create main wrapper
@@ -176,6 +177,11 @@ function renderTasks () {
       // Main div
       var new_member = document.createElement('div');
       new_member.className = 'card_task_member';
+      for (var y in taskList[i]['task_members']) {
+        if (taskList[i]['task_members'][y] == nameList[x]['name_id']) {
+          new_member.style.backgroundColor = 'lightgreen';
+        }
+      }
       // Member id
       var new_member_id = document.createElement('p');
       new_member_id.className = 'card_id_inner';
@@ -208,6 +214,7 @@ function renderTasks () {
         }
         window.localStorage.setItem('taskList', JSON.stringify(task_list));
         console.log(task_list);
+        renderTasks();
       }
       new_task_member_select.insertBefore(new_member, new_task_member_select.childNodes[0]);
     }
