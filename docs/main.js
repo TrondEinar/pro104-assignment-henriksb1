@@ -76,14 +76,17 @@ function renderNames () {
             window.localStorage.setItem('nameList', JSON.stringify(name_list)); // Save
           }
         }
+        var removed_from_tasks = '';
         for (var y in task_list) {
           for (var z in task_list[y]['task_members'])
             if  (task_list[y]['task_members'][z] == this.parentNode.parentNode.firstElementChild.innerHTML) {
+              removed_from_tasks += "'" + task_list[y]['task_text'] + "', ";
               task_list[y]['task_members'].splice(z, 1);
               window.localStorage.setItem('taskList', JSON.stringify(task_list)); // Save
             }
         }
         this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+        alert("Removed user '" + this.parentNode.parentNode.childNodes[1].innerHTML + "' from task(s): " + removed_from_tasks);
         renderTasks();
       } else { // Change color if not yet changed.
         this.style.backgroundColor = 'red';
