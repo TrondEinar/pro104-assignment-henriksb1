@@ -188,12 +188,13 @@ input {
 }
 
 .card_id {
-  right: 10px;
-  width: 30px;
+  left: 10px;
+  width: 40px;
   height: 20px;
-  top: 35px;
+  top: 37px;
   position: absolute;
   color: cornflowerblue;
+  font-size: 13px;
   font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -203,7 +204,7 @@ input {
 
 .card_id_inner {
   right: 10px;
-  width: 90px;
+  width: 110px;
   height: 20px;
   top: 5px;
   position: absolute;
@@ -213,9 +214,12 @@ input {
   content: "MemberID: ";
 }
 
+
+
 .dummy_fill {
   color: grey;
   width: 90%;
+  top: 70px;
   position: absolute;
   font-size: 10px;
   font-family: 'Source Sans Pro', sans-serif;
