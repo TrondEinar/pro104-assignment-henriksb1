@@ -1,8 +1,8 @@
 # Arbeidskrav i webprosjekt
 
 ## Medlemmer som har deltatt:
-- Knut
-- Brage
-- Eirik
-- Henrik
-- Torstein
+- Knut Heggdal
+- Brage Svensli
+- Eirik Bjørøen
+- Henrik Stene Bråthen
+- Torstein Hagen Ensrud
