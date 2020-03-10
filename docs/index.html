@@ -4,22 +4,23 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Spartan&display=swap" rel="stylesheet">
     <meta charset="utf-8">
-    <title>Testing LocalStorage</title>
+    <title>Task Manager</title>
   </head>
   <body>
-    <h1>Testing LocalStorage</h1>
+    <h1>Task Manager</h1>
 
     <div class="fieldset_container">
       <fieldset>
-        <legend>Save names</legend>
+        <legend>Add Member</legend>
         <input id="user_input_names" type="text" onfocus="this.value=''" />
-        <button id="saveNameBtn" type="button">Save</button>
+        <button id="saveNameBtn" onsubmit= "newMemberOnsubmit()" type="button">Save</button>
+      
       </fieldset>
     </div>
 
     <div class="fieldset_container">
       <fieldset>
-        <legend>Save tasks</legend>
+        <legend>Add Tasks</legend>
         <input id="user_input_tasks" type="text" onfocus="this.value=''" />
         <button id="saveTaskBtn" type="button">Save</button>
       </fieldset>
@@ -27,14 +28,16 @@
 
     <div class="fieldset_container">
       <fieldset>
-        <legend>Clear LocalStorage</legend>
-        <button id="clearBtn" type="button">Clear</button>
+        <legend>Clear All</legend>
+        <form onsubmit = "deleteEverything()">
+        <button id="clearBtn" type="submit" value = "submit">Clear</button>
+        </form>
       </fieldset>
     </div>
 
     <div id="name_output_fieldset" class="fieldset_container">
       <fieldset>
-        <legend>Saved names</legend>
+        <legend>Team Members</legend>
         <div id="name_output_div">
         </div>
       </fieldset>
@@ -42,16 +45,8 @@
 
     <div id="task_output_fieldset" class="fieldset_container">
       <fieldset>
-        <legend>Saved tasks</legend>
+        <legend>Tasks</legend>
         <div id="task_output_div">
-        </div>
-      </fieldset>
-    </div>
-
-    <div id="name_task_output_fieldset" class="fieldset_container">
-      <fieldset>
-        <legend>Members plus tasks (grid plz)</legend>
-        <div id="name_task_output_div">
         </div>
       </fieldset>
     </div>
