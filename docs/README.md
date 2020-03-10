@@ -1,6 +1,6 @@
 # Arbeidskrav i webprosjekt
 
-## Medlemmer:
+## Medlemmer som har deltatt:
 - Knut
 - Brage
 - Eirik
