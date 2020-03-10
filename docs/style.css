@@ -169,11 +169,13 @@ input {
   height: 20px;
   overflow: hidden;
   border-radius: 5px;
+  color: transparent;
 }
 
 .card_delete_box:hover {
   width: 60px;
   background-color: red;
+  color: black;
 }
 
 
@@ -186,6 +188,7 @@ input {
   right: 20px;
   background-color: red;
   padding: 0px;
+  color: inherit;
 }
 
 .card_id {
@@ -215,8 +218,6 @@ input {
 .card_id_inner::before {
   content: "MemberID: ";
 }
-
-
 
 .dummy_fill {
   color: grey;
